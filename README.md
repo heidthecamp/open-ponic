@@ -19,4 +19,6 @@ This is a rough draft of what materials I am using
 - Solenoid flow switch -- control the path of water
 - raspberry pi 3
 
-###
+### Install
+
+<!-- directions here -->
