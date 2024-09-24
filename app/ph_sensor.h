@@ -6,14 +6,16 @@
 // initialize the ph sensor
 void ph_sensor_init();
 
+void ph_sensor_term();
+
 float ph_sensor_read();
 
-void set_ph_target(float target);
+void ph_set_target(float target);
 
-void set_ph_tolerance(float tolerance);
+void ph_set_tolerance(float tolerance);
 
-float get_ph_target();
+float ph_get_target();
 
-float get_ph_tolerance();
+float ph_get_tolerance();
 
 #endif

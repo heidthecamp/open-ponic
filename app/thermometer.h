@@ -3,30 +3,26 @@
 #define THERMOMETER_H
 
 // initialize the thermometer
-void initThermometer();
+bool thermometer_init();
+
+void thermometer_term();
 
 // get the temperature from the thermometer
-float getTemperature();
+bool thermometer_get_temperature(float *temperature);
 
 // set the temperature of the thermometer
-void setTemperature(float temperature);
+bool thermometer_set_target_temperature(float temperature);
 
 // set temperature alert threshold
-void setTemperatureAlertThreshold(float threshold);
+bool thermometer_set_temperature_alert_threshold(float low, float high);
 
 // get temperature alert threshold
-float getTemperatureAlertThreshold();
+bool thermometer_get_temperature_alert_threshold(float *low, float *high);
 
 // get temperature alert status
-bool getTemperatureAlertStatus();
-
-// set temperature alert status
-void setTemperatureAlertStatus(bool status);
+bool thermometer_check_temperature_alert_status();
 
 // get temperature alert message
-char* getTemperatureAlertMessage();
-
-// set temperature alert message
-void setTemperatureAlertMessage(char* message);
+char* thermometer_get_temperature_alert_message();
 
 # endif
