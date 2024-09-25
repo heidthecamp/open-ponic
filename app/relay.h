@@ -20,6 +20,8 @@ bool relay_set(int pin, int value);
 
 bool relay_get(int pin, int *value);
 
+bool relay_all_off();
+
 #endif
 
 /*

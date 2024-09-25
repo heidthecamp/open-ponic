@@ -57,6 +57,9 @@ bool relay_get(int pin, int *value)
 bool relay_all_off()
 {
     for (int i = 0; i < RELAY_COUNT; ++i) {
-        pin_id_set(pin_ids[i], RELAY_OFF)
+        if (!pin_io_set(pin_ids[i], RELAY_OFF)){
+            return false;
+        }
     }
+    return true;
 }
