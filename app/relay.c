@@ -5,9 +5,6 @@ const int SLEEP_TIME_MS = 250;
 
 int pin_ids[RELAY_COUNT];
 
-#define ON 1
-#define OFF 0
-
 bool relay_init()
 {
     bool success = true;
@@ -19,7 +16,7 @@ bool relay_init()
     }
 
     for (int i = 0; i < RELAY_COUNT; i++) {
-        pin_ids[i] = pin_io_add();
+        pin_ids[i] = i + 2;
     }
 
     return true;
@@ -27,24 +24,10 @@ bool relay_init()
 
 bool relay_term()
 {
+    relay_all_off();
     pin_io_term();
     // Terminate the relay
     return true;
-}
-
-bool relay_set(int pin, int value)
-{
-    if (pin < 0 || pin >= RELAY_COUNT) {
-        return false;
-    }
-
-    pin_io_set(pin_ids[pin], !value);
-    return true;
-}
-
-int relay_get_RELAY_COUNT()
-{
-    return RELAY_COUNT;
 }
 
 // set the value of the relay
@@ -55,25 +38,25 @@ bool relay_set(int pin, int value)
         return false;
     }
 
-    if (!pin_assigned[pin]) {
-        return false;
-    }
-
-    pin_io_set(pin_ids[pin], value = ON);
+    pin_io_set(pin_ids[pin], value);
     usleep(SLEEP_TIME_MS * 1000);
     return true;
 }
 
-bool relay_get(int pin, bool *value)
+bool relay_get(int pin, int *value)
 {
     if (pin < 0 || pin >= RELAY_COUNT) {
         return false;
     }
 
-    if (!pin_assigned[pin]) {
-        return false;
-    }
-
+    bool tmp;
     pin_io_get(pin_ids[pin], value);
     return true;
+}
+
+bool relay_all_off()
+{
+    for (int i = 0; i < RELAY_COUNT; ++i) {
+        pin_id_set(pin_ids[i], RELAY_OFF)
+    }
 }

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.26)
+cmake_minimum_required(VERSION 3.25)
 
 project(openponic)
 
@@ -11,4 +11,9 @@ add_executable(
     app/pump.c
     app/relay.c
     app/thermometer.c
+)
+
+target_link_libraries(
+    openponic
+    pigpio
 )

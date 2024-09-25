@@ -9,15 +9,16 @@
 
 #define RELAY_COUNT 8
 
+#define RELAY_ON LO
+#define RELAY_OFF HI
+
 bool relay_init();
 
 bool relay_term();
 
-int relay_get_pin_count();
+bool relay_set(int pin, int value);
 
-bool relay_set(int pin, bool value);
-
-bool relay_get(int pin, bool *value);
+bool relay_get(int pin, int *value);
 
 #endif
 

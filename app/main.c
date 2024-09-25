@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include "relay.h"
 
-int relay_ids[RELAY_COUNT] = {-1};
+int relay_ids[RELAY_COUNT] = {0, 1, 2, 3, 4, 5, 6, 7};
 
 
 bool run_application()
@@ -16,11 +16,11 @@ bool run_application()
     }
 
     for (int i = 0; i < RELAY_COUNT; i++) {
-        relay_set(i, 1);
+        relay_set(i, RELAY_ON);
     }
 
     for (int i = 0; i < RELAY_COUNT; i++) {
-        relay_set(i, 0);
+        relay_set(i, RELAY_OFF);
     }
 
     // Run the application
@@ -34,12 +34,7 @@ bool system_init()
     if (!relay_init()) {
         return false;
     }
-    for (int i = 0; i < RELAY_COUNT; i++) {
-        if (!relay_request_pin(i)) {
-            return false;
-        }
-        relay_ids[i] = i;
-    }
+
 
     // next initialization ...
 
@@ -48,11 +43,6 @@ bool system_init()
 
 void system_term()
 {
-    for (int i = 0; i < RELAY_COUNT; i++) {
-        if (relay_ids[i] >= 0) {
-            relay_release_pin(i);
-        }
-    }
     relay_term();
 
     // next termination ...
