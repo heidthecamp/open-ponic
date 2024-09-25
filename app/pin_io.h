@@ -7,6 +7,8 @@
 #define HI 1
 #define LO 0
 
+
+
 bool pin_io_init();
 void pin_io_term();
 
