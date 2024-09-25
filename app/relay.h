@@ -7,9 +7,17 @@
 #include <stdbool.h>
 #include "pin_io.h"
 
+#define RELAY_COUNT 8
+
 bool relay_init();
 
 bool relay_term();
+
+int relay_get_pin_count();
+
+bool relay_set(int pin, bool value);
+
+bool relay_get(int pin, bool *value);
 
 #endif
 
