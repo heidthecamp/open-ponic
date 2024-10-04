@@ -6,6 +6,7 @@
 // include raspberry pi gpio library
 #include <stdbool.h>
 #include "pin_io.h"
+#include <stdio.h>
 
 #define RELAY_COUNT 8
 

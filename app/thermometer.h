@@ -15,10 +15,7 @@ bool thermometer_init();
 void thermometer_term();
 
 // get the temperature from the thermometer
-bool thermometer_get_temperature(float *temperature);
-
-// set the temperature of the thermometer
-bool thermometer_set_target_temperature(float temperature);
+bool thermometer_get_temperature(double *temperature);
 
 // set temperature alert threshold
 bool thermometer_set_temperature_alert_threshold(float low, float high);

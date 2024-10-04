@@ -5,6 +5,7 @@ bool initialized = false;
 
 bool pin_io_init() {
     if (initialized) {
+        printf("Pin io already initialized\n");
         return true;
     }
     

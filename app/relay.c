@@ -7,11 +7,9 @@ int pin_ids[RELAY_COUNT];
 
 bool relay_init()
 {
-    bool success = true;
-    success = pin_io_init();
+    printf("Initializing relay\n");
     // Initialize the relay
-
-    if (!success) {
+    if (!pin_io_init()) {
         return false;
     }
 
@@ -24,6 +22,7 @@ bool relay_init()
 
 bool relay_term()
 {
+    printf("Terminating Relay\n");
     relay_all_off();
     pin_io_term();
     // Terminate the relay
