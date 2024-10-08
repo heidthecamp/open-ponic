@@ -71,7 +71,7 @@ bool thermometer_init()
 
 void thermometer_term()
 {
-    sensors_chip_name(p_chip)
+    sensors_chip_name(p_chip);
     printf("Terminating thermometer\n");
     sensors_cleanup();
 }
