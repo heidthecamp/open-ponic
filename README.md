@@ -21,4 +21,24 @@ This is a rough draft of what materials I am using
 
 ### Install
 
+#### apt installs
+
+`sudo apt install cmake -y`
+`sudo apt install lm-sensors -y`
+`sudo apt install libsensors4-dev -y`
+
+#### updated raspi-config file
+
+so that we are using the custom pin 10 for gpio 1-wire
+`nanao /boot/firmware/config.txt`
+`dtoverlay=w1.gpio,gpiopin=10`
+
+`sudo shutdown -r now`
+
 <!-- directions here -->
+
+### Build
+
+`cd build`
+`cmake ..`
+`make`
