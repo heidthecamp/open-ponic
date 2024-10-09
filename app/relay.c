@@ -1,9 +1,11 @@
 #include "relay.h"
 #include <unistd.h>
 
+// 1/4 second sleep time to prevent shorting
 const int SLEEP_TIME_MS = 250;
 
-int pin_ids[RELAY_COUNT];
+// This is the pin order that best matches the gpio pins
+int pin_ids[RELAY_COUNT] = {2, 3, 4, 9, 8, 7, 5, 6};
 
 bool relay_init()
 {
@@ -11,10 +13,6 @@ bool relay_init()
     // Initialize the relay
     if (!pin_io_init()) {
         return false;
-    }
-
-    for (int i = 0; i < RELAY_COUNT; i++) {
-        pin_ids[i] = i + 2;
     }
 
     return true;
