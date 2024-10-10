@@ -6,10 +6,12 @@
 #include <signal.h>
 #include <unistd.h>
 
-#include "relay.h"
+// #include "relay.h"
+#include "lights.h"
 #include "thermometer.h"
+#include "pump.h"
 
-int relay_ids[RELAY_COUNT] = {0, 1, 2, 3, 4, 5, 6, 7};
+// int relay_ids[RELAY_COUNT] = {0, 1, 2, 3, 4, 5, 6, 7};
 
 
 bool run_application();
@@ -44,50 +46,23 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-// Initialize the system and return true if successful
-bool system_init()
+void handler(int signo)
 {
-    printf("initializing the system\n");
-
-    // printf("set exit conditions\n");
-    // if (atexit(system_term) != 0){
-    //     printf("could not handle atexit\n");
-    //     exit(EXIT_FAILURE);
-    // }
-
-    printf("set event handler\n");
-    signal(SIGINT, handler);
-
-    printf("initialize subsystems\n");
-    if (!relay_init()) {
-        return false;
-    }
-
-    if (!thermometer_init()) {
-        return false;
-    }
-    // next initialization ...
-
-
-    printf("Successfully initialized\n");
-    return true;
+    system_term();
+    exit(EXIT_SUCCESS);
 }
 
 bool run_application()
 {
     // remove this once the application is implemented
     static int index = 0;
-    if (index >= 5) {
+    if (index >= 500) {
         return false;
     }
 
-    for (int i = 0; i < RELAY_COUNT; i++) {
-        relay_set(i, RELAY_ON);
-    }
+    lights_check();
 
-    for (int i = 0; i < RELAY_COUNT; i++) {
-        relay_set(i, RELAY_OFF);
-    }
+    pipe_check_and_update();
 
     double temp;
 
@@ -103,16 +78,44 @@ bool run_application()
     return true;
 }
 
+// Initialize the system and return true if successful
+bool system_init()
+{
+    printf("initializing the system\n");
+
+    // printf("set exit conditions\n");
+    // if (atexit(system_term) != 0){
+    //     printf("could not handle atexit\n");
+    //     exit(EXIT_FAILURE);
+    // }
+
+    printf("set event handler\n");
+    signal(SIGINT, handler);
+
+    printf("initialize subsystems\n");
+    if (!lights_init()) {
+        return false;
+    }
+
+    if (!thermometer_init()) {
+        return false;
+    }
+    
+    if (!pump_init()) {
+        return false;
+    }
+    // next initialization ...
+
+
+    printf("Successfully initialized\n");
+    return true;
+}
+
 void system_term()
 {
     printf("terminating the system\n");
-    relay_term();
+    lights_term();
     thermometer_term();
+    pump_term();
     // next termination ...
-}
-
-void handler(int signo)
-{
-    system_term();
-    exit(EXIT_SUCCESS);
 }
