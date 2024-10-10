@@ -2,12 +2,12 @@
 #ifndef PUMP_H
 #define PUMP_H
 
-// include relay to control pump
+#include <time.h>
 #include "relay.h"
 
-void pump_init();
+bool pump_init();
 
-void pump_term();
+bool pump_term();
 
 // Function to turn on pump
 void pump_turn_on();
@@ -26,5 +26,9 @@ void pump_set_schedule(char* schedule);
 
 // get waterlevel
 float pump_get_water_level();
+
+bool pipe_init();
+
+bool pipe_check_and_update();
 
 #endif
