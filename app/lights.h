@@ -5,6 +5,7 @@
 // Include relay to control lights
 #include "relay.h"
 #include <stdbool.h>
+#include <time.h>
 
 // boolean array to store lights
 
@@ -12,9 +13,7 @@ bool lights_init();
 
 bool lights_term();
 
-bool light_add(int light);
-
-bool light_remove(int light);
+bool lights_check();
 
 // Functions to turn on lights
 bool lights_all_on();
@@ -27,21 +26,6 @@ bool lights_off(int *lights, int size);
 bool light_off(int light);
 
 // Function to get light status
-bool light_get_status();
-
-// Function to set light status
-void light_set_status(bool status);
-
-
-// ====== STRETCH GOALS ====== //
-
-// Function to get light schedule
-// char* getLightSchedule();
-
-// Function to set light schedule
-// void setLightSchedule(char* schedule);
-
-// Function to get light intensity
-// Function to set light intensity
+// bool light_get_status();
 
 #endif
