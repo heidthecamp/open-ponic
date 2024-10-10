@@ -17,9 +17,9 @@ bool relay_init();
 
 bool relay_term();
 
-bool relay_set(int pin, int value);
+bool relay_set(int relay_id, int value);
 
-bool relay_get(int pin, int *value);
+bool relay_get(int relay_id, int *value);
 
 bool relay_all_off();
 
